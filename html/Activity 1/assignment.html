@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Online Course Registration</title>
+</head>
+<body>
+
+    <h1 align="center">Student Registration Form</h1>
+    <hr>
+
+    <form action="submit_registration.php" method="POST">
+
+        <table border="1" cellpadding="10" align="center" width="50%">
+
+            <tr>
+                <td><b>First Name:</b></td>
+                <td><input type="text" name="fname" required></td>
+            </tr>
+
+            <tr>
+                <td><b>Last Name:</b></td>
+                <td><input type="text" name="lname" required></td>
+            </tr>
+
+            <tr>
+                <td><b>Email ID:</b></td>
+                <td><input type="email" name="email" required></td>
+            </tr>
+
+            <tr>
+                <td><b>Password:</b></td>
+                <td><input type="password" name="pass" required></td>
+            </tr>
+
+            <tr>
+                <td><b>Gender:</b></td>
+                <td>
+                    <input type="radio" name="gender" value="Male"> Male
+                    <input type="radio" name="gender" value="Female"> Female
+                </td>
+            </tr>
+
+            <tr>
+                <td><b>Select Course:</b></td>
+                <td>
+                    <select name="course">
+                        <option value="">-- Select a Course --</option>
+                        <option value="mca">MCA</option>
+                        <option value="bca">BCA</option>
+                        <option value="python">Python Certification</option>
+                        <option value="java">Java Full Stack</option>
+                    </select>
+                </td>
+            </tr>
+
+            <tr>
+                <td><b>Mode of Learning:</b></td>
+                <td>
+                    <input type="checkbox" name="mode" value="online"> Online Live
+                    <input type="checkbox" name="mode" value="video"> Recorded Videos
+                    <input type="checkbox" name="mode" value="notes"> PDF Notes
+                </td>
+            </tr>
+
+            <tr>
+                <td><b>Address:</b></td>
+                <td>
+                    <textarea name="address" rows="4" cols="30"></textarea>
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="2" align="center">
+                    <input type="submit" value="Register Now">
+                    <input type="reset" value="Clear Form">
+                </td>
+            </tr>
+
+        </table>
+    </form>
+
+</body>
+</html>

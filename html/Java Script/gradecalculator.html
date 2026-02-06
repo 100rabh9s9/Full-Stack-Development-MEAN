@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Student Calculator</title>
+
+  <script>
+    function calculate()
+     {
+      var c = Number(document.getElementById("cprog").value);
+      var cpp = Number(document.getElementById("cpp").value);
+      var java = Number(document.getElementById("java").value);
+      var web = Number(document.getElementById("webdev").value);
+
+      var total = c + cpp + java + web;
+      var average = total / 4;
+
+      document.getElementById("total").value = total;
+      document.getElementById("avg").value = average;
+
+      var grade;
+      if (average >= 90)
+        grade = "A";
+      else if (average >= 75)
+        grade = "B";
+      else if (average >= 60)
+        grade = "C";
+      else if (average >= 50)
+        grade = "D";
+      else
+        grade = "Fail";
+
+      document.getElementById("grade").value = grade;
+    }
+
+    function clearAll() {
+      document.getElementById("cprog").value = "";
+      document.getElementById("cpp").value = "";
+      document.getElementById("java").value = "";
+      document.getElementById("webdev").value = "";
+      document.getElementById("total").value = "";
+      document.getElementById("avg").value = "";
+      document.getElementById("grade").value = "";
+      document.getElementById("cprog").focus();
+    }
+  </script>
+</head>
+
+<body>
+  <h1 align="center">Student Calculator</h1>
+
+  <table border="2" align="center" cellpadding="5">
+    <tr>
+      <td>
+        <form>
+          C Prog:
+          <input type="text" id="cprog"><br><br>
+
+          C++:
+          <input type="text" id="cpp"><br><br>
+
+          Java:
+          <input type="text" id="java"><br><br>
+
+          Web Dev:
+          <input type="text" id="webdev"><br><br>
+
+          Total:
+          <input type="text" id="total" readonly><br><br>
+
+          Average:
+          <input type="text" id="avg" readonly><br><br>
+
+          Grade:
+          <input type="text" id="grade" readonly><br><br>
+
+          <input type="button" value="Calculate" onclick="calculate()">
+          <input type="button" value="Clear" onclick="clearAll()">
+        </form>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Calculator</title>
+    <script type="text/javascript" lang="javascript">
+      function sum()
+      {
+        var  a = Number(document.getElementById("num1").value);
+          var b = Number(document.getElementById("num2").value);
+          var c = a + b;
+          document.getElementById("res").value = c;
+      }
+
+      function sub()
+      {
+        var  a = Number(document.getElementById("num1").value);
+          var b = Number(document.getElementById("num2").value);
+          var c = a - b;
+          document.getElementById("res").value = c;
+      }
+      function div()
+      {
+        var  a = Number(document.getElementById("num1").value);
+          var b = Number(document.getElementById("num2").value);
+          var c = a /  b;
+          document.getElementById("res").value = c;
+      }
+      function mul()
+      {
+        var  a = Number(document.getElementById("num1").value);
+          var b = Number(document.getElementById("num2").value);
+          var c = a * b;
+          document.getElementById("res").value = c;
+      }
+      function modulus()
+      {
+        var  a = Number(document.getElementById("num1").value);
+          var b = Number(document.getElementById("num2").value);
+          var c = a % b;
+          document.getElementById("res").value = c;
+      }
+
+      function clearAll()
+      {
+        document.getElementById("num1").value=" ";
+          document.getElementById("num2").value=" ";
+            document.getElementById("res").value=" ";
+              document.getElementById("num1").focus();
+      }
+
+    </script>
+  </head>
+  <body>
+    <h1 align="center">Calculator</h1>
+    <table border="2" align="center" cellpadding="10">
+      <tr>
+        <td>
+
+    <form align="justify">
+      Enter Number 1: <input type="text" id="num1">
+      <br>
+        Enter Number 2: <input type="text" id="num2">
+        <br>
+        Result : <input type="text" id="res">
+        <br>
+        <input type="button"  value="+" onclick="sum()">
+        <input type="button"  value="-" onclick="sub()">
+        <input type="button"  value="*" onclick="mul()">
+        <input type="button"  value="/" onclick="div()">
+        <input type="button"  value="%" onclick="modulus()">
+        <input type="button"  value="Clear" onclick="clearAll()">
+    </form>
+  </td>
+  </tr>
+    </table>
+  </body>
+</html>
