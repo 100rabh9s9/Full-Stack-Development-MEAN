@@ -1,0 +1,22 @@
+!<html>
+    <head>
+        <title>Natural Numbers</title>
+    </head>
+    <script>
+        function printNatural()
+         {
+            let num = document.getElementById("num").value;
+            let result = "";
+            for (let i = 1; i <= num; i++) {
+                result += i + " ";
+            }
+            document.getElementById("result").innerText = result;
+        }
+    </script>
+    <body>
+        <h1>Print Natural Numbers</h1>
+        Enter a number: <input type="number" id="num" />
+        <button onclick="printNatural()">Print</button>
+        <p id="result"></p>
+    </body>
+</html>
