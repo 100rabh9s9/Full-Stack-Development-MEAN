@@ -1,0 +1,31 @@
+<!-- Print Multiple of 5 using for loop-->
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multiple of 5</title>
+ </head>
+ <script>
+    function printMultiple() 
+    {
+        let num = document.getElementById("num").value;
+        let result = "";
+        for (let i = 1; i <= num; i++) 
+        {
+            if (i % 5 === 0) 
+            {
+                result += i + " ";
+            }
+        }
+        document.getElementById("result").innerText = result;
+    }
+
+ </script>
+ <body>
+    <h1>Print Multiples of 5</h1>
+    Enter a number: <input type="number" id="num" placeholder="Enter Value"/>
+    <button type="button" onclick="printMultiple()">Print</button>
+    <p id="result"></p>
+ </body>
+ </html>

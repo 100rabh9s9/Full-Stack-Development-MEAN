@@ -1,0 +1,28 @@
+<!-- For Each Loop , Iterates over the properties of an Object-->
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For...in Example</title>
+ </head>
+ 
+ <body>
+    <h2>for...in Loop Example</h2>
+    <p id="result"></p>
+
+    <script>
+    let student = 
+    {
+        Name:"Rahul",
+        Age: 20,
+        Course:"MCA"
+    };
+    let output = "";
+    for(let key in student){
+        output += key +":" + student[key]+"<br>";
+    }
+    document.getElementById("result").innerHTML=output;
+ </script>
+ </body>
+ </html>
