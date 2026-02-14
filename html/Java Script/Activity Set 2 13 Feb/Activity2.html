@@ -1,0 +1,79 @@
+<!--Develope a webpage with Online Test for 5 questions with 2 options each and on submission it must print "Result summary" as
+Score as 5/5 or 2/5 and percentage with result as pass or fail-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Test Result Summary</title>
+    <script>
+    function calculateScore()
+    {
+        let score = 0;
+        const totalQuestions = 5;
+        let i = 1;
+        for (i = 1; i <= totalQuestions; i++) 
+           {
+                let answer = document.querySelector('input[name="q' + i + '"]:checked');
+
+                if (answer && answer.value === "correct") {
+                     score++;
+        }
+    }
+    document.getElementById("result").innerHTML =
+        "Your score is: " + score + " / " + totalQuestions;
+    let percentage = (score / totalQuestions) * 100;
+    document.getElementById("percentage").innerHTML =
+        "Percentage: " + percentage + "%";
+    let passFail = (percentage >= 50) ? "Pass" : "Fail";
+    document.getElementById("passFail").innerHTML =
+        "Result: " + passFail;
+    }
+    </script>
+</head>
+<body>
+    <h1 align="center">Online Test: With Result Summary</h1>
+    <form id="quiz">
+        <p>1.JavaScript is a ___ language.</p>
+        <input type="radio" id="q1a1" name="q1" value="correct">
+        <label for="q1a1">Programming</label>
+        <br>
+        <input type="radio" id="q1a2" name="q1" value="wrong">
+        <label for="q1a2">Markup</label><br>
+
+        <p>2.HTML is a ___ language.</p>
+        <input type="radio" id="q2a1" name="q2" value="correct">
+        <label for="q2a1">Markup</label>
+        <br>
+        <input type="radio" id="q2a2" name="q2" value="wrong">
+        <label for="q2a2">Programming</label><br>
+
+        <p>3. Founder of HTML:</p>
+        <input type="radio" id="q3a1" name="q3" value="wrong">
+        <label for="q3a1">James Gosling</label>
+        <br>
+        <input type="radio" id="q3a2" name="q3" value="correct">
+        <label for="q3a2">Tim Berners-Lee</label>
+        <br>
+
+        <p>4. BootStrap is a ____</p>
+        <input type="radio" id="q4a1" name="q4" value="wrong">
+        <label for="q4a1">Scripting Language</label>
+        <br>
+        <input type="radio" id="q4a2" name="q4" value="correct">
+        <label for="q4a2">Front-End FrameWork</label><br>
+
+        <p>5.Which JavaScript method changes the content of an HTML element?</p>
+        <input type="radio" id="q5a1" name="q5" value="wrong">
+        <label for="q5a1">getElementById()</label>
+        <br>
+        <input type="radio" id="q5a2" name="q5" value="correct">
+        <label for="q5a2">innerHTML</label><br>
+
+        <input type="submit" value="Submit" onclick="calculateScore(); return false;">
+    </form>
+    <p id="result"></p>
+    <p id="percentage"></p>
+    <p id="passFail"></p>   
+</body>
+</html>

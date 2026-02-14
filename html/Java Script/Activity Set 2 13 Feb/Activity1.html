@@ -1,0 +1,100 @@
+<!--Develope a webpage with Online Test for 5 questions with 2 options each and on submission it must print "Your Score : 5/4/3/2/1/0
+For each correct answer 1 is the score.Check al the answers and print the Score in the same page"-->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Online Test</title>
+
+<script>
+function calculateScore()
+ {
+    let score = 0;
+
+    if (document.querySelector('input[name="q1"]:checked')?.value === "correct")
+        score++;
+
+    if (document.querySelector('input[name="q2"]:checked')?.value === "correct")
+        score++;
+
+    if (document.querySelector('input[name="q3"]:checked')?.value === "correct")
+        score++;
+
+    if (document.querySelector('input[name="q4"]:checked')?.value === "correct")
+        score++;
+
+    if (document.querySelector('input[name="q5"]:checked')?.value === "correct")
+        score++;
+
+    document.getElementById("result").innerHTML =
+        "Your Score : " + score;
+}
+</script>
+
+</head>
+
+<body>
+
+<h1 align="center">Online Test</h1>
+
+<form onsubmit="calculateScore(); return false;">
+
+<table border="1" align="center" width="50%" cellpadding="10">
+
+<tr>
+<td>
+<p>1. JavaScript is a ___ language.</p>
+<input type="radio" name="q1" value="correct"> Programming<br>
+<input type="radio" name="q1" value="wrong"> Markup
+</td>
+</tr>
+
+<tr>
+<td>
+<p>2. HTML is a ___ language.</p>
+<input type="radio" name="q2" value="correct"> Markup<br>
+<input type="radio" name="q2" value="wrong"> Programming
+</td>
+</tr>
+
+<tr>
+<td>
+<p>3. Founder of HTML:</p>
+<input type="radio" name="q3" value="wrong"> James Gosling<br>
+<input type="radio" name="q3" value="correct"> Tim Berners-Lee
+</td>
+</tr>
+
+<tr>
+<td>
+<p>4. Bootstrap is a ____</p>
+<input type="radio" name="q4" value="wrong"> Scripting Language<br>
+<input type="radio" name="q4" value="correct"> Front-End Framework
+</td>
+</tr>
+
+<tr>
+<td>
+<p>5. Which JavaScript method changes the content of an HTML element?</p>
+<input type="radio" name="q5" value="wrong"> getElementById()<br>
+<input type="radio" name="q5" value="correct"> innerHTML
+</td>
+</tr>
+
+<tr>
+<td align="center">
+<input type="submit" value="Submit">
+</td>
+</tr>
+
+<tr>
+<td align="center">
+<p id="result"></p>
+</td>
+</tr>
+
+</table>
+
+</form>
+
+</body>
+</html>

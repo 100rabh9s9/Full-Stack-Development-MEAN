@@ -1,0 +1,55 @@
+<!--Develope a webPage for registration with values Naem , email and password . All fields shoud contain a value , the emial field should contain "@"
+should contain "@",password length shoudl be 7-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration Page</title>
+</head>
+<body>
+
+    <h1>Registration Page</h1>
+
+    <form id="registrationForm">
+        <label>Name:</label>
+        <input type="text" id="name"><br><br>
+
+        <label>Email:</label>
+        <input type="text" id="email"><br><br>
+
+        <label>Password:</label>
+        <input type="password" id="password"><br><br>
+
+        <button type="submit">Register</button>
+    </form>
+
+<script>
+document.getElementById("registrationForm").addEventListener("submit", function(event) 
+{
+    event.preventDefault();
+
+    let name = document.getElementById("name").value.trim();
+    let email = document.getElementById("email").value.trim();
+    let password = document.getElementById("password").value;
+
+    if (name === "" || email === "" || password === "") {
+        alert("All fields are required.");
+        return;
+    }
+
+    if (!email.includes("@")) {
+        alert("Email must contain '@'.");
+        return;
+    }
+
+    if (password.length > 7) {
+        alert("Password must be Maximum 7 characters long.");
+        return;
+    }
+
+    alert("Registration successful!");
+});
+</script>
+
+</body>
+</html>

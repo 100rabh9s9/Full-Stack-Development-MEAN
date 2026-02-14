@@ -1,0 +1,73 @@
+<!--Develope a webpage for student management with name and Course and an add button, after giving name and course click on "Add" button the data has to be inserted into a table below the form.
+data has to be inserted into the table 
+After giving name click on "Search Button",the name if found print found and display name and course, else "Not Found"-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <script>
+        function addStudent(){
+            const name = document.getElementById("name").value;
+            const course = document.getElementById("course").value;
+
+            if(name && course){
+                const table = document.getElementById("studentTable");
+                let row = table.insertRow();
+                let cell1 = row.insertCell(0);
+                let cell2 = row.insertCell(1);
+                cell1.innerHTML = name;
+                cell2.innerHTML = course;
+
+                document.getElementById("name").value = "";
+                document.getElementById("course").value = "";
+            } else {
+                alert("Please enter both name and course.");
+            }
+        }
+       function searchStudent() 
+       {
+    const nameToSearch = document.getElementById("name").value.toLowerCase();
+    const table = document.getElementById("studentTable");
+
+    for (let i = 1; i < table.rows.length; i++) 
+    {
+        const name = table.rows[i].cells[0].innerText.toLowerCase();
+
+        if (name === nameToSearch)
+         {
+            document.getElementById("searchResult").innerText =
+                "Found: " + table.rows[i].cells[0].innerText +
+                " - " + table.rows[i].cells[1].innerText;
+            return; 
+        }
+    }
+
+    document.getElementById("searchResult").innerText = "Not Found";
+}
+    </script>
+</head>
+<body>
+    <h1 align="center">Student Management</h1>
+    <form id="studentForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+        <br><br>
+        <label for="course">Course:</label>
+        <input type="text" id="course" name="course" required>
+        <br><br>
+        <button type="button" onclick="addStudent()">Add</button>    
+        <button type="button" onclick="searchStudent()">Search</button>
+    </form>
+    <br>
+    <div id="searchResult" align="center"></div>
+    <br>
+    <table border="2" id="studentTable" align="center">
+        <tr>
+            <th>Name</th>
+            <th>Course</th>
+        </tr>
+    </table>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!--Create a form to check whether a user is eligible to vote or not .
+Enter Name,Date of Birth,Address (textarea),phone number , whne we click on the submit button, it should Check if all fields are
+entered and age is to be calculated and displayed. When clicked on "Eligible for voting",if eligible then it should display
+"User(name) is eligible for voting" else "user(name) is not eligible for voting"-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Voting Eligibility</title>
+</head>
+
+<body>
+    <h1>Registration Page</h1>
+
+    <form id="registrationForm">
+        <label>Name:</label>
+        <input type="text" id="name" placeholder="Your Name">
+        <br><br>
+
+        <label>Date of Birth:</label>
+        <input type="date" id="dob">
+        <br><br>
+
+        <label>Address:</label>
+        <textarea id="address" placeholder="Your Address"></textarea>
+        <br><br>
+
+        <label>Phone Number:</label>
+        <input type="tel" id="phone" placeholder="Phone Number">
+        <br><br>
+
+        <div id="ageDisplay">
+            <label for="age">Age:</label>
+            <input type="number" id="age" readonly>
+        </div>
+
+        <button type="submit">Submit</button>
+        <button type="button" onclick="checkEligibility()">Eligible for Voting</button>
+
+        <br><br>
+        
+        <div id="eligibilityResult"></div>
+    </form>
+
+<script>
+document.getElementById("registrationForm").addEventListener("submit", function(event) 
+{
+    event.preventDefault();
+
+    let name = document.getElementById("name").value.trim();
+    let dob = document.getElementById("dob").value;
+    let address = document.getElementById("address").value.trim();
+    let phone = document.getElementById("phone").value.trim();
+
+    if (name === "" || dob === "" || address === "" || phone === "") {
+        alert("All fields are required!");
+        return;
+    }
+
+    let today = new Date();
+    let birthDate = new Date(dob);
+
+    let age = today.getFullYear() - birthDate.getFullYear();
+    let monthDiff = today.getMonth() - birthDate.getMonth();
+
+    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+    }
+
+    document.getElementById("ageDisplay").innerHTML = "Age: " + age;
+});
+
+function checkEligibility() 
+{
+    let name = document.getElementById("name").value.trim();
+    let dob = document.getElementById("dob").value;
+
+    if (name === "" || dob === "")
+ {
+        alert("Please fill the form and submit first!");
+        return;
+    }
+
+    let today = new Date();
+    let birthDate = new Date(dob);
+
+    let age = today.getFullYear() - birthDate.getFullYear();
+    let monthDiff = today.getMonth() - birthDate.getMonth();
+
+    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+    }
+
+    if (age >= 18) {
+        document.getElementById("eligibilityResult").innerHTML =
+            "User " + name + " is eligible for voting.";
+    } else {
+        document.getElementById("eligibilityResult").innerHTML =
+            "User " + name + " is not eligible for voting.";
+    }
+}
+</script>
+
+</body>
+</html>
