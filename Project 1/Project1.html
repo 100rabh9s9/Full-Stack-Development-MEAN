@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Basic meta tags for character encoding and responsive design -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker</title>
+
+    <!-- Bootstrap 5 CSS - provides styling for buttons, forms, tables, etc -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS for our specific styling -->
+    <style>
+        /* Light background color for the page */
+        body {
+            background-color: #f8f9fa;
+        }
+
+        /* Footer box styling - fixed at bottom right */
+        .footer-details {
+            position: fixed;
+            bottom: 10px;
+            right: 15px;
+            font-size: 12px;
+            text-align: right;
+            background: rgba(255,255,255,0.9);
+            padding: 6px 10px;
+            border-radius: 6px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Top navigation bar -->
+    <nav class="navbar navbar-dark bg-primary">
+        <div class="container-fluid d-flex justify-content-center">
+            <!-- App title in center of navbar -->
+            <span class="navbar-brand mb-0 h1">Expense Tracker</span>
+        </div>
+    </nav>
+
+    <!-- Main container for all content -->
+    <div class="container mt-4">
+
+        <!-- Card to add or update expenses -->
+        <div class="card shadow-sm mb-4">
+            <div class="card-header bg-light">
+                <strong>Add / Update Expense</strong>
+            </div>
+            <!-- Form with all input fields -->
+            <div class="card-body">
+                <form id="expenseForm" class="row g-3">
+                    <!-- Hidden field to store expense ID when editing -->
+                    <input type="hidden" id="expenseId">
+
+                    <!-- Expense title input -->
+                    <div class="col-md-3">
+                        <input type="text" id="title" class="form-control" placeholder="Expense Title">
+                    </div>
+
+                    <!-- Amount input (only numbers) -->
+                    <div class="col-md-2">
+                        <input type="number" id="amount" class="form-control" placeholder="Amount">
+                    </div>
+
+                    <!-- Date picker -->
+                    <div class="col-md-2">
+                        <input type="date" id="date" class="form-control">
+                    </div>
+
+                    <!-- Category dropdown -->
+                    <div class="col-md-3">
+                        <select id="category" class="form-select">
+                            <option value="">Select Category</option>
+                            <option>Food</option>
+                            <option>Travel</option>
+                            <option>Shopping</option>
+                            <option>Bills</option>
+                        </select>
+                    </div>
+
+                    <!-- Save button -->
+                    <div class="col-md-2 d-grid">
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+                </form>
+                <!-- Space for error messages -->
+                <div id="errorMsg" class="text-danger mt-2"></div>
+            </div>
+        </div>
+
+        <!-- Search and filter section -->
+        <div class="row mb-3">
+            <!-- Search input field -->
+            <div class="col-md-4">
+                <input type="text" id="searchInput" class="form-control" placeholder="Search by Title">
+            </div>
+            <!-- Search button -->
+            <div class="col-md-2 d-grid">
+                <button onclick="searchExpense()" class="btn btn-success">Search</button>
+            </div>
+            <!-- Reset button to show all expenses -->
+            <div class="col-md-2 d-grid">
+                <button onclick="loadExpenses()" class="btn btn-secondary">Reset</button>
+            </div>
+        </div>
+
+        <!-- Table to display all expenses -->
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover text-center">
+                <!-- Table header row -->
+                <thead class="table-primary">
+                    <tr>
+                        <th>Title</th>
+                        <th>Amount</th>
+                        <th>Date</th>
+                        <th>Category</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <!-- Table body - filled by JavaScript -->
+                <tbody id="expenseTable"></tbody>
+            </table>
+        </div>
+
+        <!-- Total expenses display -->
+        <h5 class="mt-3 text-end">
+            Total Expense: ₹<span id="totalAmount">0</span>
+        </h5>
+
+    </div>
+
+    <!-- Footer with student info -->
+    <div class="footer-details">
+        <strong>SOURABH S</strong><br>
+        KH.EN.P2MCA25157<br>
+        MCA B (AI & DS) 2025
+    </div>
+
+    <!-- JavaScript code for functionality -->
+    <script>
+        // Get expenses from browser storage or create empty array
+        let expenses = JSON.parse(localStorage.getItem("expenses")) || [];
+
+        // Get form, table, and error message elements
+        const form = document.getElementById("expenseForm");
+        const table = document.getElementById("expenseTable");
+        const errorMsg = document.getElementById("errorMsg");
+
+        // When user submits the form
+        form.addEventListener("submit", function(e) {
+            // Prevent page refresh
+            e.preventDefault();
+
+            // Get all form values
+            const id = document.getElementById("expenseId").value;
+            const title = document.getElementById("title").value.trim();
+            const amount = document.getElementById("amount").value;
+            const date = document.getElementById("date").value;
+            const category = document.getElementById("category").value;
+
+            // Check if any field is empty
+            if(title === "" || amount === "" || date === "" || category === "") {
+                errorMsg.textContent = "All fields are required!";
+                return;
+            }
+
+            // Check if amount is positive
+            if(amount <= 0) {
+                errorMsg.textContent = "Amount must be greater than zero!";
+                return;
+            }
+            // Clear error message
+            errorMsg.textContent = "";
+
+            // If editing existing expense
+            if(id) {
+                const index = expenses.findIndex(exp => exp.id == id);
+                expenses[index] = { id, title, amount, date, category };
+            } 
+            // If adding new expense
+            else {
+                expenses.push({
+                    id: Date.now(),  // Create unique ID using timestamp
+                    title,
+                    amount,
+                    date,
+                    category
+                });
+            }
+
+            // Save to browser storage
+            localStorage.setItem("expenses", JSON.stringify(expenses));
+            // Clear form fields
+            form.reset();
+            document.getElementById("expenseId").value = "";
+            // Reload table to show new data
+            loadExpenses();
+        });
+        // Function to load and display all expenses
+        function loadExpenses() {
+            // Clear existing table rows
+            table.innerHTML = "";
+            // Get fresh data from storage
+            expenses = JSON.parse(localStorage.getItem("expenses")) || [];
+
+            // Calculate total
+            let total = 0;
+
+            // Loop through each expense and add to table
+            expenses.forEach(exp => {
+                // Add amount to total
+                total += parseFloat(exp.amount);
+
+                // Add row to table
+                table.innerHTML += `
+                    <tr>
+                        <td>${exp.title}</td>
+                        <td>₹${exp.amount}</td>
+                        <td>${exp.date}</td>
+                        <td>${exp.category}</td>
+                        <td>
+                            <!-- Edit button -->
+                            <button class="btn btn-warning btn-sm" onclick="editExpense(${exp.id})">Edit</button>
+                            <!-- Delete button -->
+                            <button class="btn btn-danger btn-sm" onclick="deleteExpense(${exp.id})">Delete</button>
+                        </td>
+                    </tr>
+                `;
+            });
+
+            // Update total amount display
+            document.getElementById("totalAmount").textContent = total;
+        }
+        // Function to edit an expense
+        function editExpense(id) {
+            // Find expense by ID
+            const exp = expenses.find(e => e.id == id);
+            // Fill form fields with current data
+            document.getElementById("expenseId").value = exp.id;
+            document.getElementById("title").value = exp.title;
+            document.getElementById("amount").value = exp.amount;
+            document.getElementById("date").value = exp.date;
+            document.getElementById("category").value = exp.category;
+        }
+
+        // Function to delete an expense
+        function deleteExpense(id) {
+            // Ask for confirmation
+            if(confirm("Are you sure you want to delete this record?")) {
+                // Remove from array
+                expenses = expenses.filter(exp => exp.id != id);
+                // Save to storage
+                localStorage.setItem("expenses", JSON.stringify(expenses));
+                // Reload table
+                loadExpenses();
+            }
+        }
+
+        // Function to search expenses
+        function searchExpense() {
+            // Get search input value
+            const searchInput = document.getElementById("searchInput");
+            const searchValue = searchInput.value.trim().toLowerCase();
+
+            // If search is empty, show all
+            if (searchValue === "") {
+                loadExpenses();
+                return;
+            }
+
+            // Filter expenses that match search term
+            const filtered = expenses.filter(exp =>
+                exp.title.toLowerCase().includes(searchValue)
+            );
+
+            // Clear table
+            table.innerHTML = "";
+
+            // If no results found
+            if (filtered.length === 0) {
+                alert("No records found for: " + searchValue);
+                searchInput.value = "";
+                loadExpenses();
+                return;
+            }
+
+            // Display filtered results
+            filtered.forEach(exp => {
+                table.innerHTML += `
+                    <tr>
+                        <td>${exp.title}</td>
+                        <td>${exp.amount}</td>
+                        <td>${exp.date}</td>
+                        <td>${exp.category}</td>
+                        <td>
+                            <button class="btn btn-sm btn-warning" onclick="editExpense(${exp.id})">Edit</button>
+                            <button class="btn btn-sm btn-danger" onclick="deleteExpense(${exp.id})">Delete</button>
+                        </td>
+                    </tr>
+                `;
+            });
+
+            // Clear search input
+            searchInput.value = "";
+        }
+
+        // Load expenses when page first opens
+        loadExpenses();
+    </script>
+</body>
+</html>
