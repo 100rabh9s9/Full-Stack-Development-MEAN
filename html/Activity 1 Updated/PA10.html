@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Exam System</title>
+    <style>
+        body
+         {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+
+        /* Header Section */
+        header {
+            background-color: #f39c12; /* Orange */
+            color: white;
+            text-align: center;
+            padding: 40px 0;
+            font-size: 32px;
+        }
+
+        /* Navigation Bar */
+        nav {
+            background-color: #f1c40f; /* Yellow */
+            padding: 10px;
+            text-align: left;
+            border-bottom: 2px solid #000;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: blue;
+            font-weight: bold;
+            margin-right: 15px;
+            font-size: 14px;
+        }
+
+        /* Welcome Banner */
+        .welcome-banner {
+            background-color: #008000; /* Green */
+            color: white;
+            padding: 8px 20px;
+            font-style: italic;
+            font-size: 14px;
+        }
+
+        /* Main Content Wrapper */
+        .container {
+            display: flex;
+            min-height: 400px;
+        }
+
+        /* Left Content Area */
+        .main-content
+        {
+            background-color: #808080;
+            flex: 3;
+            padding: 20px;
+            color: white;
+        }
+
+        .content-body
+        {
+            display: flex;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .profile-pic {
+            width: 150px;
+            height: 150px;
+            border: 2px solid white;
+            object-fit: cover;
+        }
+
+        /* Right Sidebar */
+        .sidebar {
+            background-color: #87ceeb; /* Light Blue */
+            flex: 1;
+            padding: 20px;
+            text-align: center;
+            border-left: 2px solid #333;
+        }
+
+        .sidebar h2 {
+            margin-top: 0;
+            border-bottom: 2px solid red;
+            padding-bottom: 10px;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .member-card {
+            margin-bottom: 20px;
+        }
+
+        .member-img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border: 1px solid #fff;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #f39c12;
+            text-align: center;
+            padding: 15px;
+            font-size: 13px;
+            border-top: 1px solid #333;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        Online Exam System
+    </header>
+
+    <nav>
+        <a href="#">HOME</a> || <a href="#">ABOUT US</a> || <a href="#">Courses</a> || <a href="#">Exam Date</a> || <a href="#">Result</a> || <a href="#">Gallery</a>
+    </nav>
+
+    <div class="welcome-banner">
+        Welcome to Online Exam System
+    </div>
+
+    <div class="container">
+        <main class="main-content">
+            <h1>Welcome to Online Exam System</h1>
+            <hr>
+            <div class="content-body">
+                <img src="image.png" alt="Profile" class="profile-pic">
+                <p>
+                    Video provides a powerful way to help you prove your point. When you click Online Video, you can paste in the embed code for the video you want to add. You can also type a keyword to search online for the video that best fits your document... <br><br>
+                    Themes and styles also help keep your document coordinated. When you click Design and choose a new Theme, the pictures, charts, and SmartArt graphics change to match your new theme.
+                </p>
+            </div>
+        </main>
+
+        <aside class="sidebar">
+            <h2>Our Members</h2>
+            <div class="member-card">
+                <img src="manager.png" alt="Member" class="member-img">
+                <p><strong>Manager</strong></p>
+            </div>
+            <div class="member-card">
+                <img src="manager.png" alt="Member" class="member-img">
+                <p><strong>Sales Manager</strong></p>
+            </div>
+        </aside>
+    </div>
+    <footer>
+        Activity 10 AWT MEAN Stack
+    </footer>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Multiplication Table</title>
+</head>
+<body>
+
+    <h3>Enter a number to generate its table:</h3>
+
+    <input type="number" id="numInput" placeholder="Enter number">
+    <button onclick="generateTable()">generate</button>
+
+    <br><br>
+
+    <div id="tableContainer"></div>
+
+    <script>
+        function generateTable()
+        {
+
+            var n = document.getElementById("numInput").value;
+            var container = document.getElementById("tableContainer");
+
+            if (n === "") {
+                container.innerHTML = "Please enter a valid number.";
+                return;
+            }
+
+            var tableHTML = "<table border='1' style='border-color: red; border-collapse: collapse;'>";
+
+            for (var i = 1; i <= 10; i++) {
+                tableHTML += "<tr>";
+                tableHTML += "<td style='padding: 8px;'>" + n + " x " + i + " = " + (n * i) + "</td>";
+                tableHTML += "</tr>";
+            }
+
+            tableHTML += "</table>";
+
+
+            container.innerHTML = tableHTML;
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Prime Number Generator</title>
+</head>
+<body>
+
+    <center>
+        <h3>Prime Number Generator</h3>
+
+        <table border="1" style="border-collapse: collapse;">
+            <tr>
+                <td>Start</td>
+                <td><input type="number" id="startNum"></td>
+            </tr>
+            <tr>
+                <td>End</td>
+                <td><input type="number" id="endNum"></td>
+            </tr>
+            <tr>
+                <td>Prime Number</td>
+                <td>
+                    <textarea id="resultArea" rows="5" cols="30" style="border: 2px solid red;"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                    <button onclick="generatePrimes()">Generate</button>
+                </td>
+            </tr>
+        </table>
+    </center>
+
+    <script>
+        function isPrime(num) {
+            if (num <= 1) return false;
+            for (let i = 2; i <= Math.sqrt(num); i++)
+            {
+                if (num % i === 0) return false;
+            }
+            return true;
+        }
+
+        function generatePrimes()
+        {
+            var start = parseInt(document.getElementById("startNum").value);
+            var end = parseInt(document.getElementById("endNum").value);
+            var resultArea = document.getElementById("resultArea");
+
+            var primes = [];
+
+            for (var i = start; i <= end; i++)
+             {
+                if (isPrime(i))
+                {
+                    primes.push(i);
+                }
+            }
+            resultArea.value = primes.join(", ");
+        }
+    </script>
+
+</body>
+</html>

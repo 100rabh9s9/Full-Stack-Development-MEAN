@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Doctor Appointment Form</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #ffffff;
+        }
+
+        .container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            padding: 40px;
+        }
+
+        .doctor-img img {
+            width: 500px;
+        }
+
+        .form-section {
+            width: 700px;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 28px;
+        }
+
+        hr {
+            border: 1px solid red;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: inline-block;
+            width: 150px;
+            margin-top: 10px;
+        }
+
+        input, textarea {
+            padding: 5px;
+            margin-top: 10px;
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+
+        textarea {
+            width: 300px;
+            height: 80px;
+        }
+
+        .checkbox-group {
+            margin-left: 150px;
+        }
+
+        button {
+            margin-top: 15px;
+            padding: 5px 15px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="doctor-img">
+    
+        <img src="https://imgs.search.brave.com/-R1DB8nN-FgXL8Twrdxph3nwTi_LESwr-bm0-mXsMLo/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tb29k/ZHAuY29tL3dwLWNv/bnRlbnQvdXBsb2Fk/cy8yMDI1LzEwL3do/YXRzYXBwLWRwLWRv/Y3Rvci53ZWJw" alt="Doctor">
+    </div>
+    <hr>
+    <div class="form-section">
+        <form id="appointmentForm" novalidate>
+            <h2>Doctor Appointment Form</h2>
+            <hr>
+            <label>Appointment Date</label>
+            <input type="date" id="appointmentDate" required><br>
+
+        <label>Appointment Time</label>
+        <input type="time" id="appointmentTime" required><br>
+
+        <label>Name</label>
+        <input type="text" id="firstName" placeholder="First" required>
+        <input type="text" id="lastName" placeholder="Last" required><br>
+
+        <label>Gender</label>
+        <input type="radio" name="gender" value="Male" required> Male
+        <input type="radio" name="gender" value="Female" required> Female<br>
+
+        <label>Phone</label>
+        <input type="tel" id="phone" placeholder="10-digit" pattern="[0-9]{10}" required><br>
+
+        <label>Address</label>
+        <input type="text" id="city" placeholder="city" required>
+        <input type="text" id="state" placeholder="state" required><br>
+
+        <label>Your Query</label>
+        <textarea id="query" required></textarea><br>
+
+        <label>Appointment Type</label>
+        <div class="checkbox-group">
+            <p>Select which appointment type(s) you require <br>
+            <input type="checkbox" name="appointmentType" value="Cervix checkup"> Cervix checkup<br>
+            <input type="checkbox" name="appointmentType" value="Heart checkup"> Heart checkup<br>
+            <input type="checkbox" name="appointmentType" value="Eye check-up"> Eye check-up<br>
+            <input type="checkbox" name="appointmentType" value="Hearing Test"> Hearing Test<br>
+            </p>
+        </div>
+
+        <div style="margin-left:150px;">
+            <button type="submit">Send</button>
+        </div>
+
+        <p id="formError" style="color: red; margin-left:150px;"></p>
+
+    </form>
+    </div>
+</div>
+
+<script>
+    const form = document.getElementById("appointmentForm");
+    const error = document.getElementById("formError");
+
+    form.addEventListener("submit", function (event) {
+        error.textContent = "";
+        if (!form.checkValidity()) {
+            event.preventDefault();
+            error.textContent = "Please fill all required fields correctly.";
+            return;
+        }
+        const checkedTypes = document.querySelectorAll("input[name='appointmentType']:checked");
+        if (checkedTypes.length === 0) {
+            event.preventDefault();
+            error.textContent = "Select at least one appointment type.";
+        }
+    });
+</script>
+</body>
+</html>

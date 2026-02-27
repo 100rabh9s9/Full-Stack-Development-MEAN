@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mark-Sheet Calculator</title>
+</head>
+<body>
+
+    <center>
+        <h2>Mark-Sheet Calculator</h2>
+
+        <table border="1" cellpadding="5" style="border-collapse: collapse;">
+            <tr>
+                <td>Hindi</td>
+                <td><input type="number" min="0" max="100" id="hindi" req> (Max : 100)</td>
+            </tr>
+            <tr>
+                <td>English</td>
+                <td><input type="number"  min="0" max="100" id="english"> (Max : 100)</td>
+            </tr>
+            <tr>
+                <td>Maths</td>
+                <td><input type="number" min="0" max="100" id="maths"> (Max : 100)</td>
+            </tr>
+            <tr>
+                <td>Science</td>
+                <td><input type="number"  min="0" max="100" id="science"> (Max : 100)</td>
+            </tr>
+            <tr>
+                <td>Art</td>
+                <td><input type="number" min="0" max="100"  id="art"> (Max : 100)</td>
+            </tr>
+            <tr>
+                <td>Computer</td>
+                <td><input type="number" min="0" max="100"  id="computer"> (Max : 100)</td>
+            </tr>
+
+            <tr>
+                <td>Total</td>
+                <td><input type="text" id="total" readonly></td>
+            </tr>
+            <tr>
+                <td>Percentage</td>
+                <td><input type="text" id="percent" readonly></td>
+            </tr>
+            <tr>
+                <td>Grade</td>
+                <td><input type="text" id="grade" readonly style="width: 100%;"></td>
+            </tr>
+
+            <tr>
+                <td colspan="2" align="center">
+                    <button onclick="calculate()">Calculate</button>
+                </td>
+            </tr>
+        </table>
+    </center>
+
+    <script>
+function calculate() {
+
+    let subjects = ["hindi","english","maths","science","art","computer"];
+    let total = 0;
+
+    for (let sub of subjects) {
+
+        let value = parseFloat(document.getElementById(sub).value);
+
+        
+        if (isNaN(value)) {
+            alert("Please enter all marks.");
+            return;
+        }
+
+        if (value < 0 || value > 100) {
+            alert("Marks must be between 0 and 100 only.");
+            return;
+        }
+
+        total += value;
+    }
+
+    let percentage = (total / 600) * 100;
+
+    let grade = "";
+    if (percentage >= 90) grade = "A+ (Excellent)";
+    else if (percentage >= 80) grade = "A (Very Good)";
+    else if (percentage >= 70) grade = "B (Good)";
+    else if (percentage >= 60) grade = "C (Satisfactory)";
+    else if (percentage >= 50) grade = "D (Pass)";
+    else grade = "F (Fail)";
+
+    document.getElementById("total").value = total;
+    document.getElementById("percent").value = percentage.toFixed(2) + "%";
+    document.getElementById("grade").value = grade;
+}
+</script>
+</body>
+</html>

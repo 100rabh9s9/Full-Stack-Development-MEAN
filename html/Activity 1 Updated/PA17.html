@@ -1,0 +1,49 @@
+<!--Develope a webpage for student management with "Name",Age- with an "Add" Button . After giving name and age and clck on "add" 
+the data has to be inserted into a table below the form.-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Management</title>
+    <script>
+        function addStudent(){
+            const name = document.getElementById("name").value;
+            const age = document.getElementById("age").value;
+
+            if(name && age){
+                const table = document.getElementById("studentTable");
+                let row = table.insertRow();
+                let cell1 = row.insertCell(0);
+                let cell2 = row.insertCell(1);
+                cell1.innerHTML = name;
+                cell2.innerHTML = age;
+
+                document.getElementById("name").value = "";
+                document.getElementById("age").value = "";
+            } else {
+                alert("Please enter both name and age.");
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1 align="center">Student Management</h1>
+    <form id="studentForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+        <br><br>
+        <label for="age">Age:</label>
+        <input type="number" id="age" name="age" required>
+        <br><br>
+        <button type="button" onclick="addStudent()">Add</button>    
+
+        
+    <table border="2" id="studentTable" align="center">
+        <tr>
+            <th>Name</th>
+            <th>Age</th>
+        </tr>
+    </table>
+</body>
+</html>
