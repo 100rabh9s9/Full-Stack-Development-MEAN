@@ -1,0 +1,117 @@
+<!--Create a form to check whether a user is eligible to vote or not .
+Enter Name,Date of Birth,Address (textarea),phone number , whne we click on the submit button, it should Check if all fields are
+entered and age is to be calculated and displayed. When clicked on "Eligible for voting",if eligible then it should display
+"User(name) is eligible for voting" else "user(name) is not eligible for voting"-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Voting Eligibility</title>
+</head>
+<body>
+
+    <center>
+        <h1>Registration Page</h1>
+
+        <form id="registrationForm">
+            <table border="1" cellpadding="10" style="border-collapse: collapse;">
+                <tr>
+                    <td><label>Name:</label></td>
+                    <td><input type="text" id="name" placeholder="Your Name"></td>
+                </tr>
+
+                <tr>
+                    <td><label>Date of Birth:</label></td>
+                    <td><input type="date" id="dob"></td>
+                </tr>
+
+                <tr>
+                    <td><label>Address:</label></td>
+                    <td><textarea id="address" placeholder="Your Address"></textarea></td>
+                </tr>
+
+                <tr>
+                    <td><label>Phone Number:</label></td>
+                    <td><input type="tel" id="phone" placeholder="Phone Number"></td>
+                </tr>
+
+                <tr>
+                    <td><label>Age:</label></td>
+                    <td>
+                        <span id="ageDisplay">Submit to calculate age</span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="2" align="center">
+                        <button type="submit">Submit</button>
+                        <button type="button" onclick="checkEligibility()">Check Eligibility</button>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="2" align="center">
+                        <div id="eligibilityResult"></div>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </center>
+
+<script>
+document.getElementById("registrationForm").addEventListener("submit", function(event)
+{
+    event.preventDefault();
+
+    let name = document.getElementById("name").value.trim();
+    let dob = document.getElementById("dob").value;
+    let address = document.getElementById("address").value.trim();
+    let phone = document.getElementById("phone").value.trim();
+
+    if (name === "" || dob === "" || address === "" || phone === "") {
+        alert("All fields are required!");
+        return;
+    }
+
+    let age = calculateAge(dob);
+    document.getElementById("ageDisplay").innerHTML = age;
+});
+
+function calculateAge(dobString) {
+    let today = new Date();
+    let birthDate = new Date(dobString);
+    let age = today.getFullYear() - birthDate.getFullYear();
+    let monthDiff = today.getMonth() - birthDate.getMonth();
+
+    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+    }
+    return age;
+}
+
+function checkEligibility()
+{
+    let name = document.getElementById("name").value.trim();
+    let dob = document.getElementById("dob").value;
+
+    if (name === "" || dob === "") {
+        alert("Please enter Name and Date of Birth first!");
+        return;
+    }
+
+    let age = calculateAge(dob);
+
+    if (age >= 18) {
+        document.getElementById("eligibilityResult").innerHTML =
+            "<b>User " + name + " is eligible for voting.</b>";
+        document.getElementById("eligibilityResult").style.color = "green";
+    } else {
+        document.getElementById("eligibilityResult").innerHTML =
+            "<b>User " + name + " is not eligible for voting.</b>";
+        document.getElementById("eligibilityResult").style.color = "red";
+    }
+}
+</script>
+
+</body>
+</html>

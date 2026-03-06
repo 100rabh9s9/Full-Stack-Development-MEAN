@@ -120,27 +120,22 @@
 </div>
 
 <script>
-const form = document.getElementById("appointmentForm");
-const error = document.getElementById("formError");
+    const form = document.getElementById("appointmentForm");
+    const error = document.getElementById("formError");
 
-form.addEventListener("submit", function (event) {
-    error.textContent = "";
-
-    if (!form.checkValidity()) {
-        event.preventDefault();
-        error.textContent = "Please fill all required fields correctly.";
-        return;
-    }
-
-    const checkedTypes = document.querySelectorAll("input[name='appointmentType']:checked");
-
-    if (checkedTypes.length === 0) {
-        event.preventDefault();
-        error.textContent = "Select at least one appointment type.";
-        return;
-    }
-    alert("Appointment booked successfully!");
-    form.reset();
-
-});
+    form.addEventListener("submit", function (event) {
+        error.textContent = "";
+        if (!form.checkValidity()) {
+            event.preventDefault();
+            error.textContent = "Please fill all required fields correctly.";
+            return;
+        }
+        const checkedTypes = document.querySelectorAll("input[name='appointmentType']:checked");
+        if (checkedTypes.length === 0) {
+            event.preventDefault();
+            error.textContent = "Select at least one appointment type.";
+        }
+    });
 </script>
+</body>
+</html>
