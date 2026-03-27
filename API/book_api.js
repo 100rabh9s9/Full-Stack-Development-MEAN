@@ -27,6 +27,35 @@ type in Json Format
 Then Send 
 we will see only the entry 
 change to GET and we can see all entries including the latest*/
+
+
+//PUT -Update book details(27/03/2026)
+//To run PUT in Postman ; Edit using raw and JSON format and add the details to be updated and send
+//Then Use GET to see the updated details (remove the id from the link btw)
+
+app.put('/books/:id',(req,res)=>{
+    const id = parseInt(req.params.id);
+    const book = books.find(b => b.id === id);
+    if(!book){
+        return res.status(404).send('Book not found');
+    }
+    book.title = req.body.title;
+    book.author = req.body.author;
+    res.send(book);
+
+}); 
+
+//DELETE - Remove a book
+app.delete('/books/:id',(req,res)=>{
+    const id = parseInt(req.params.id);
+    const book = books.find(b => b.id === id);
+    if(!book){
+        return res.status(404).send('Book not found');
+    }
+    books = books.filter(b => b.id !== id);
+    res.send('Book deleted successfully');
+});
+
 app.listen(3000,()=>{
     console.log("Book API is running on port 3000");
 });
