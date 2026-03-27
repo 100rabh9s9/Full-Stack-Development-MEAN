@@ -13,6 +13,7 @@ app.get('/', (req, res) => {
   res.send(`Current date and time: ${req.currentTime}`);
 });
 
+
 app.listen(3000, () => {
     console.log("Server is running on port 3000");
 });
